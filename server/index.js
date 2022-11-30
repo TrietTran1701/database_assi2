@@ -108,6 +108,29 @@ app.post("/api/patient", (req, res) => {
   });
 });
 
+// Get Patient By DoctorID
+// @route: /api/patient/:id
+// @method: GET
+app.get("/api/patient/byDoctor/:doctorID", (req, res) => {
+  let query = sqlQuery.getPatienInfoByDoctorID;
+  const doctorID = req.params.doctorID;
+  db.query(query, [doctorID], (err, result) => {
+    if (err) {
+      res.send({ err: err });
+    } else {
+      if (result) {
+        res.send({
+          message: "Get patient info successfully",
+          data: result,
+          status: 200,
+        });
+      } else {
+        res.send({ message: "Cannot get patient" });
+      }
+    }
+  });
+});
+
 app.get("/", (req, res) => {});
 app.listen(3001, () => {
   console.log("running on port 3001");
