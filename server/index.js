@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Register Manager User
 // @route: /api/user/register
-// @type: PUT
+// @method: PUT
 app.put("/api/user/register", (req, res) => {
   let query = sqlQuery.registerUser;
   const userInfo = {
@@ -32,7 +32,7 @@ app.put("/api/user/register", (req, res) => {
 
 // Login
 // @route: /api/user/login
-// @type: POST
+// @method: POST
 
 app.post("/api/user/login", (req, res) => {
   let query = sqlQuery.getManagerUser;
@@ -51,6 +51,58 @@ app.post("/api/user/login", (req, res) => {
         });
       } else {
         res.send({ message: "Wrong username or password" });
+      }
+    }
+  });
+});
+
+// Get Patient By ID
+// @route: /api/patient/:id
+// @method: GET
+app.get("/api/patient/:id", (req, res) => {
+  // res.send(req.params.id);
+  let query = sqlQuery.getPatienInfoByID;
+  const patientID = req.params.id;
+  // res.send(typeof patientID);
+  db.query(query, [patientID], (err, result) => {
+    if (err) {
+      res.send({ err: err });
+    } else {
+      if (result) {
+        res.send({
+          message: "Get patient info successfully",
+          data: result,
+          status: 200,
+        });
+      } else {
+        res.send({ message: "Cannot get patient" });
+      }
+    }
+  });
+});
+
+// Add New Patient
+// @route: /api/patient
+// @method: POST
+
+app.post("/api/patient", (req, res) => {
+  // res.send(req);
+  // console.log(req.body);
+
+  let query = sqlQuery.addNewPatient;
+  const newPatientInfo = req.body;
+  db.query(query, [newPatientInfo], (err, result) => {
+    if (err) {
+      res.send({ err: err });
+    } else {
+      if (result) {
+        res.send({
+          message: "Add patient successfully",
+          data: result,
+          status: 200,
+        });
+      } else {
+        res.send({ message: "Cannot add patient" });
       }
     }
   });
