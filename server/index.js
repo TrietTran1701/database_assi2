@@ -56,6 +56,31 @@ app.post("/api/user/login", (req, res) => {
   });
 });
 
+// Search Patient
+// @route /api/searchPatient/:id
+// @method: GET
+app.get("/api/searchPatient/:id", (req, res) => {
+  // res.send(req.params.id);
+  let query = sqlQuery.searchPatientInfo;
+  const patientID = req.params.id;
+  // res.send(typeof patientID);
+  db.query(query, [patientID], (err, result) => {
+    if (err) {
+      res.send({ err: err });
+    } else {
+      if (result) {
+        res.send({
+          message: "Search patient info successfully",
+          data: result,
+          status: 200,
+        });
+      } else {
+        res.send({ message: "Cannot get patient" });
+      }
+    }
+  });
+});
+
 // Get Patient By ID
 // @route: /api/patient/:id
 // @method: GET
@@ -126,6 +151,56 @@ app.get("/api/patient/byDoctor/:doctorID", (req, res) => {
         });
       } else {
         res.send({ message: "Cannot get patient" });
+      }
+    }
+  });
+});
+
+// Get Report Fee
+// @route /api/searchPatient/:id
+// @method: GET
+app.get("/api/fee/:id", (req, res) => {
+  // res.send(req.params.id);
+  let query = sqlQuery.getFeeReport;
+  const patientID = req.params.id;
+  // res.send(typeof patientID);
+  db.query(query, [patientID], (err, result) => {
+    if (err) {
+      res.send({ err: err });
+    } else {
+      if (result) {
+        res.send({
+          message: "Get fee successfully",
+          data: result,
+          status: 200,
+        });
+      } else {
+        res.send({ message: "Cannot get fee" });
+      }
+    }
+  });
+});
+
+// Get All Patient
+// @route /api/searchPatient/:id
+// @method: GET
+app.get("/api/allPatients/", (req, res) => {
+  // res.send(req.params.id);
+  let query = sqlQuery.getAllPatients;
+  // const patientID = req.params.id;
+  // res.send(typeof patientID);
+  db.query(query, (err, result) => {
+    if (err) {
+      res.send({ err: err });
+    } else {
+      if (result) {
+        res.send({
+          message: "Get patients successfully",
+          data: result,
+          status: 200,
+        });
+      } else {
+        res.send({ message: "Cannot get patients" });
       }
     }
   });
