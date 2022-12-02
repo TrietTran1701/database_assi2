@@ -2,6 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.ant-btn {
+.ant-input-search-button {
   background-color: blue !important;
 }
