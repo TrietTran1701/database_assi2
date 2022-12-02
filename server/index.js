@@ -136,21 +136,23 @@ app.post("/api/patient", (req, res) => {
 // Get Patient By DoctorID
 // @route: /api/patient/:id
 // @method: GET
-app.get("/api/patient/byDoctor/:doctorID", (req, res) => {
+app.get("/api/doctor/", (req, res) => {
+  // res.send(req.params.id);
   let query = sqlQuery.getPatienInfoByDoctorID;
-  const doctorID = req.params.doctorID;
-  db.query(query, [doctorID], (err, result) => {
+  // const patientID = req.params.id;
+  // res.send(typeof patientID);
+  db.query(query, (err, result) => {
     if (err) {
       res.send({ err: err });
     } else {
       if (result) {
         res.send({
-          message: "Get patient info successfully",
+          message: "Get patients successfully",
           data: result,
           status: 200,
         });
       } else {
-        res.send({ message: "Cannot get patient" });
+        res.send({ message: "Cannot get patients" });
       }
     }
   });

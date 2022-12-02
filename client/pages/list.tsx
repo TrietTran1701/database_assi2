@@ -6,9 +6,9 @@ const { Search } = Input;
 
 const columns = [
   {
-    title: "TreatmentID",
-    dataIndex: "treatmentID",
-    key: "treatmentID",
+    title: "DoctorID",
+    dataIndex: "treatDocID",
+    key: "treatDocID",
   },
   {
     title: "PatientID",
@@ -45,19 +45,22 @@ const columns = [
     dataIndex: "careNurseID",
     key: "careNurseID",
   },
+  {
+    title: "TreatmentID",
+    dataIndex: "treatmentID",
+    key: "treatmentID",
+  },
 ];
 const list = () => {
   const [patient, setPatient] = React.useState();
   const onSearch = async (value: string) => {
-    const response = await axios.get(
-      `http://localhost:3001/api/patient/byDoctor/${value}`
-    );
+    const response = await axios.get(`http://localhost:3001/api/doctor/`);
 
     if (response) setPatient(response.data.data);
   };
 
   const onGetAll = async () => {
-    const response = await axios.get(`http://localhost:3001/api/allPatients/`);
+    const response = await axios.get(`http://localhost:3001/api/doctor/`);
 
     if (response) setPatient(response.data.data);
   };
@@ -71,12 +74,33 @@ const list = () => {
           </h1>
         </div>
         <div className="flex flex-col items-center gap-2">
-          <Search
+          {/* <Search
             placeholder="Enter doctor's ID"
             enterButton
             size="large"
             onSearch={onSearch}
-          />
+          /> */}
+          <Button
+            type="default"
+            style={{
+              background: "#fff!important",
+            }}
+            onClick={onGetAll}
+          >
+            List all patients treated by a doctor
+          </Button>
+
+          <Button
+            type="default"
+            style={{
+              background: "#fff!important",
+            }}
+            onClick={() => {
+              setPatient(undefined);
+            }}
+          >
+            Hide all patients treated by a doctor
+          </Button>
         </div>
       </div>
       {patient && (

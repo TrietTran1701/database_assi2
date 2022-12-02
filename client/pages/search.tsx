@@ -64,6 +64,18 @@ const search = () => {
           >
             Show all patients' information
           </Button>
+
+          <Button
+            type="default"
+            style={{
+              background: "#fff!important",
+            }}
+            onClick={() => {
+              setPatient(undefined);
+            }}
+          >
+            Hide all patients' information
+          </Button>
         </div>
       </div>
       {patient && (

@@ -5,3 +5,25 @@
 .ant-input-search-button {
   background-color: blue !important;
 }
+
+body {
+  min-height: 100vh;
+  margin: 0;
+}
+
+header {
+  min-height: 50px;
+  background: lightcyan;
+}
+footer {
+  min-height: 50px;
+  //background: PapayaWhip;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+.article {
+  flex: 1;
+}
