@@ -29,7 +29,7 @@ export default function Home() {
 
       {/* <Button shape="circle">Primary btn</Button> */}
 
-      <main className="flex items-center justify-center mt-10 px-5 py-5 flex-col items-center">
+      <main className="flex items-center justify-center mt-10 px-5 py-5 flex-col ">
         <Form
           name="basic"
           labelCol={{ span: 8 }}

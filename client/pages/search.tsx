@@ -58,7 +58,7 @@ const search = () => {
           <Button
             type="default"
             style={{
-              backgroundColor: "#fff!important",
+              background: "#fff!important",
             }}
             onClick={onGetAll}
           >
